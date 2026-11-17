@@ -1,0 +1,30 @@
+# Schmoose Live — pull-deployment for your own server.
+# Image: ghcr.io/derdast3/schmoose-live (private — docker login ghcr.io to pull).
+# Configuration: .env (template: .env.sample) — instructions: README.md.
+# This file belongs into the runtime directory (e.g. /srv/schmoose-live),
+# NOT into a repo clone — see README, section "Layout".
+#
+# The SFU MUST run with host networking: mediasoup announces the host's
+# public IPs to browsers (ICE) and serves UDP media directly. A bridge
+# network + port publishing would break ICE candidate handling, and
+# firewall rules (UFW) would not see the traffic.
+#
+# Logging: journald if available; on hosts without systemd (e.g.
+# Alpine/OpenRC) add to the service:
+#   logging:
+#     driver: json-file
+#     options: { max-size: "10m", max-file: "3" }
+
+name: schmoose-live
+
+services:
+  sfu:
+    image: ghcr.io/derdast3/schmoose-live:latest
+    container_name: schmoose-live
+    restart: unless-stopped
+    network_mode: host
+    env_file: .env
+    volumes:
+      # TLS certificate for the SFU hostname (fullchain.pem + privkey.pem,
+      # PEM format). chmod 600 on the key; read-only mount.
+      - ${CERT_DIR:?set CERT_DIR in .env}:/etc/sfu/certs:ro
