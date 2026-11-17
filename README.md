@@ -7,7 +7,7 @@ for the same people, no second sign-in, no subscription, no telemetry.
 
 This repository contains the **deployment files** for running the Schmoose
 Live SFU on your own server. The application ships as a prebuilt container
-image; the source lives in the private `DerDast3/mysfu` repository.
+image from ghcr.io — pull, configure, run.
 
 **Contents:** [What it is](#what-it-is) · [Floor control](#floor-control--one-mic-rules-the-room) ·
 [Requirements](#requirements) · [Quick start](#quick-start) ·
