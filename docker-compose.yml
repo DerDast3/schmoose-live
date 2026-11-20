@@ -25,6 +25,7 @@ services:
     network_mode: host
     env_file: .env
     volumes:
-      # TLS certificate for the SFU hostname (fullchain.pem + privkey.pem,
-      # PEM format). chmod 600 on the key; read-only mount.
-      - ${CERT_DIR:?set CERT_DIR in .env}:/etc/sfu/certs:ro
+      # TLS certificate: HOST directory (fullchain.pem + privkey.pem,
+      # chmod 600 on the key) mounted read-only. The app reads them from
+      # the CONTAINER path CERT_DIR (default /etc/sfu/certs) — see .env.
+      - ${CERT_HOST_DIR:?set CERT_HOST_DIR in .env}:/etc/sfu/certs:ro

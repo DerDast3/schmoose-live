@@ -71,7 +71,7 @@ mkdir -p /srv/schmoose-live/certs          # put fullchain.pem + privkey.pem her
 cd /srv/schmoose-live
 curl -O https://raw.githubusercontent.com/DerDast3/schmoose-live/main/docker-compose.yml
 curl -O https://raw.githubusercontent.com/DerDast3/schmoose-live/main/.env.sample
-mv .env.sample .env                        # edit: PUBLIC_HOST, CERT_DIR, AUTH_MODE
+mv .env.sample .env                        # edit: PUBLIC_HOST, CERT_HOST_DIR, AUTH_MODE
 docker login ghcr.io -u <your-github-user> # token with read:packages
 docker compose up -d
 ```
